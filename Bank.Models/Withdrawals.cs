@@ -12,12 +12,12 @@ namespace Bank.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Withdrawal
+    public partial class Withdrawals
     {
         public int WithdrawalID { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public Nullable<decimal> Amount { get; set; }
         public int TransactionID { get; set; }
     
-        public virtual Transaction Transaction { get; set; }
+        public virtual Transactions Transactions { get; set; }
     }
 }

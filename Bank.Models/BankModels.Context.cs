@@ -25,10 +25,10 @@ namespace Bank.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Deposit> Deposits { get; set; }
-        public virtual DbSet<Transaction> Transactions { get; set; }
-        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
+        public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Deposits> Deposits { get; set; }
+        public virtual DbSet<Transactions> Transactions { get; set; }
+        public virtual DbSet<Withdrawals> Withdrawals { get; set; }
     }
 }
