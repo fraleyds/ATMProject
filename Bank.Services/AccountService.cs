@@ -9,6 +9,21 @@ namespace Bank.Services
 {
     public class AccountService
     {
+        // Methods
+
+        private Accounts AccountByNumber(Bank_LibraryEntities context, int numberInput)
+        {
+
+        }
+            
+        public void AccountLogin(int numberInput, int pinInput)
+        {
+            using (var context = new Bank_LibraryEntities())
+            {
+
+            }
+        }
+
         public bool CreateAccount(int custId, int acctNum, string type, int pin, Nullable<decimal> balance, string lastName, string firstName)
         {
             using (var context = new Bank_LibraryEntities())
