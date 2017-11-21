@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bank.Models;
+using Bank.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,9 @@ namespace Bank.ATMConsole
     {
         static void Main(string[] args)
         {
+            var foo = new CustomerService();
+            foo.CreateCustomer("Soprano", "Tony");
+
         }
     }
 }

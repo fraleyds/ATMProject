@@ -14,7 +14,7 @@
           <Property Name="AccountNum" Type="int" Nullable="false" />
           <Property Name="AccountType" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="PIN" Type="int" Nullable="false" />
-          <Property Name="Balance" Type="int" />
+          <Property Name="Balance" Type="money" />
           <Property Name="LastName2" Type="varchar" MaxLength="25" />
           <Property Name="FirstName2" Type="varchar" MaxLength="25" />
         </EntityType>
@@ -40,7 +40,6 @@
           </Key>
           <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TransactionTime" Type="datetime" Nullable="false" />
-          <Property Name="AccountID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Withdrawals">
           <Key>
@@ -78,20 +77,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Transactions_dbo_Accounts_AccountID">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="AccountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Withdrawals_dbo_Transactions_TransactionID">
           <End Role="Transactions" Type="Self.Transactions" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -120,10 +105,6 @@
             <End Role="Transactions" EntitySet="Transactions" />
             <End Role="Deposits" EntitySet="Deposits" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Transactions_dbo_Accounts_AccountID" Association="Self.FK_dbo_Transactions_dbo_Accounts_AccountID">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Transactions" EntitySet="Transactions" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_Withdrawals_dbo_Transactions_TransactionID" Association="Self.FK_dbo_Withdrawals_dbo_Transactions_TransactionID">
             <End Role="Transactions" EntitySet="Transactions" />
             <End Role="Withdrawals" EntitySet="Withdrawals" />
@@ -143,11 +124,10 @@
           <Property Name="AccountNum" Type="Int32" Nullable="false" />
           <Property Name="AccountType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PIN" Type="Int32" Nullable="false" />
-          <Property Name="Balance" Type="Int32" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="LastName2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="FirstName2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_dbo_Accounts_dbo_Customers_CustomerID" FromRole="Accounts" ToRole="Customers" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK_dbo_Transactions_dbo_Accounts_AccountID" FromRole="Accounts" ToRole="Transactions" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -173,8 +153,6 @@
           </Key>
           <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TransactionTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AccountID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Transactions_dbo_Accounts_AccountID" FromRole="Transactions" ToRole="Accounts" />
           <NavigationProperty Name="Deposits" Relationship="Self.FK_dbo_Deposits_dbo_Transactions_TransactionID" FromRole="Transactions" ToRole="Deposits" />
           <NavigationProperty Name="Withdrawals" Relationship="Self.FK_dbo_Withdrawals_dbo_Transactions_TransactionID" FromRole="Transactions" ToRole="Withdrawals" />
         </EntityType>
@@ -198,20 +176,6 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Transactions_dbo_Accounts_AccountID">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountID" />
-            </Principal>
-            <Dependent Role="Transactions">
-              <PropertyRef Name="AccountID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -252,10 +216,6 @@
           <AssociationSet Name="FK_dbo_Accounts_dbo_Customers_CustomerID" Association="Self.FK_dbo_Accounts_dbo_Customers_CustomerID">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Transactions_dbo_Accounts_AccountID" Association="Self.FK_dbo_Transactions_dbo_Accounts_AccountID">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Deposits_dbo_Transactions_TransactionID" Association="Self.FK_dbo_Deposits_dbo_Transactions_TransactionID">
             <End Role="Transactions" EntitySet="Transactions" />
@@ -309,7 +269,6 @@
               <MappingFragment StoreEntitySet="Transactions">
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="TransactionTime" ColumnName="TransactionTime" />
-                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

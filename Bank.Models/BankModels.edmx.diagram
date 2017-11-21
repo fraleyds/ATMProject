@@ -4,14 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="834c893d5b094f59b90d53e11cbe6b44" Name="Diagram1">
-        <EntityTypeShape EntityType="Bank_LibraryModel.Accounts" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bank_LibraryModel.Customers" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bank_LibraryModel.Deposits" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bank_LibraryModel.Transactions" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bank_LibraryModel.Withdrawals" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="c47f6e2d905243f392ff4ad3bcdac45a" Name="Diagram1">
+        <EntityTypeShape EntityType="Bank_LibraryModel.Accounts" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bank_LibraryModel.Customers" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bank_LibraryModel.Deposits" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bank_LibraryModel.Transactions" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bank_LibraryModel.Withdrawals" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <AssociationConnector Association="Bank_LibraryModel.FK_dbo_Accounts_dbo_Customers_CustomerID" ManuallyRouted="false" />
-        <AssociationConnector Association="Bank_LibraryModel.FK_dbo_Transactions_dbo_Accounts_AccountID" ManuallyRouted="false" />
         <AssociationConnector Association="Bank_LibraryModel.FK_dbo_Deposits_dbo_Transactions_TransactionID" ManuallyRouted="false" />
         <AssociationConnector Association="Bank_LibraryModel.FK_dbo_Withdrawals_dbo_Transactions_TransactionID" ManuallyRouted="false" />
       </Diagram>
