@@ -68,16 +68,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BankModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="CustomerModel.cs" />
     <Compile Include="Customers.cs">
       <DependentUpon>BankModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="DepositModel.cs" />
     <Compile Include="Deposits.cs">
       <DependentUpon>BankModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="InteractionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionModel.cs" />
     <Compile Include="Transactions.cs">
       <DependentUpon>BankModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="WithdrawalModel.cs" />
     <Compile Include="Withdrawals.cs">
       <DependentUpon>BankModels.tt</DependentUpon>
     </Compile>

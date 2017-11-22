@@ -68,6 +68,7 @@ namespace Bank.ATMConsole
                 // LOGIN SUCCESS
                 else
                 {
+                    Console.Clear();
                     var customer = customerService.CustomerById(currentAcct.CustomerID);
 
                     TransactionService transaction = new TransactionService();
@@ -79,49 +80,64 @@ namespace Bank.ATMConsole
                             "1. View Account Details\n" +
                             "2. Withdraw Money\n" +
                             "3. Deposit Money\n" +
-                            "4. Exit");
+                            "4. View Transaction History\n" +
+                            "5. Exit");
 
                         string actionInput = Console.ReadLine();
 
+                        // Viewing Account Details
                         if (actionInput == "1")
                         {
-                            
+                            Console.WriteLine($"Account Owner Surname: {customer.LastName}\n" +
+                                $"Account Owner First Name: {customer.FirstName}\n");
+                            if (currentAcct.LastName2 != null)
+                            {
+                                Console.WriteLine($"Secondary User Surname: {currentAcct.LastName2}");
+                            }
+                            if (currentAcct.FirstName2 != null)
+                            {
+                                Console.WriteLine($"Secondary User First Name: {currentAcct.FirstName2}\n");
+                            }
+                            Console.WriteLine($"Account Number: {currentAcct.AccountNum}\n" +
+                                $"Account Type: {currentAcct.AccountType}\n\n" +
+                                $"Balance: {currentAcct.Balance}");
+                            Console.ReadLine();
                         }
+
+                        // Withdrawing
                         else if (actionInput == "2")
                         {
                             WithdrawalService withdrawal = new WithdrawalService();
                         }
+
+                        // Depositing
                         else if (actionInput == "3")
                         {
                             DepositService deposit = new DepositService();
                         }
+                        
+                        // Transaction history
                         else if (actionInput == "4")
+                        {
+                            Console.Clear();
+                            transaction.GetInteractions(currentAcct.AccountID);
+                            Console.ReadLine();
+                        }
+
+                        // Closing the program
+                        else if (actionInput == "5")
                         {
                             menuLoop = false;
                             Console.WriteLine("Goodbye!");
-                            Console.ReadLine();
                         }
+
+                        // None of the above
                         else
                         {
                             Console.WriteLine("Invalid input.");
                             Console.ReadLine();
-                            
                         }
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     running = false;
                 }
             }
