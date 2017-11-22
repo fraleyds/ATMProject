@@ -11,17 +11,58 @@ namespace Bank.Services
     {
         // Methods
 
-        private Accounts AccountByNumber(Bank_LibraryEntities context, int numberInput)
-        {
-
-        }
-            
-        public void AccountLogin(int numberInput, int pinInput)
+        public AccountModel Login(int numberInput, int pinInput)
         {
             using (var context = new Bank_LibraryEntities())
             {
-
+                var loginSession = LoginBack(context, numberInput, pinInput);
+                if (loginSession == null)
+                {
+                    return null;
+                }
+                Console.WriteLine("You logged in!");
+                return new AccountModel
+                {
+                    AccountID = loginSession.AccountID,
+                    CustomerID = loginSession.CustomerID,
+                    AccountNum = loginSession.AccountNum,
+                    AccountType = loginSession.AccountType,
+                    PIN = loginSession.PIN,
+                    Balance = loginSession.Balance,
+                    LastName2 = loginSession.LastName2,
+                    FirstName2 = loginSession.FirstName2
+                };
             }
+        }
+        
+        private Accounts LoginBack(Bank_LibraryEntities context, int numberInput, int pinInput)
+        {
+            return
+                context
+                    .Accounts
+                    .SingleOrDefault(e => e.AccountNum == numberInput && e.PIN == pinInput);
+        }
+
+        private IEnumerable<AccountModel> GetAccount(Bank_LibraryEntities ctx, int numberInput)
+        {
+            return
+                ctx
+                    .Accounts
+                    .Where(e => e.AccountNum == numberInput)
+                    .Select(
+                        e =>
+                            new AccountModel
+                            {
+                                AccountID = e.AccountID,
+                                CustomerID = e.CustomerID,
+                                AccountNum = e.AccountNum,
+                                AccountType = e.AccountType,
+                                PIN = e.PIN,
+                                Balance = e.Balance,
+                                LastName2 = e.LastName2,
+                                FirstName2 = e.FirstName2
+                            })
+                    .ToArray();
         }
 
         public bool CreateAccount(int custId, int acctNum, string type, int pin, Nullable<decimal> balance, string lastName, string firstName)

@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountModel.cs" />
     <Compile Include="Accounts.cs">
       <DependentUpon>BankModels.tt</DependentUpon>
     </Compile>
