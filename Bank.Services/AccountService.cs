@@ -85,5 +85,20 @@ namespace Bank.Services
                 return context.SaveChanges() == 1;
             }
         }
+
+        public bool DepositToAccount(Bank_LibraryEntities context, AccountModel account, Nullable<decimal> amount)
+        {
+            Accounts realAccount;
+
+            realAccount =
+                context
+                    .Accounts
+                    .SingleOrDefault(e => e.AccountID == account.AccountID);
+
+            if (realAccount == null) return false;
+            realAccount.Balance = realAccount.Balance + amount;
+
+            return context.SaveChanges() == 1;
+        }
     }
 }

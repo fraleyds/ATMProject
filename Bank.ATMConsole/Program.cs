@@ -72,6 +72,9 @@ namespace Bank.ATMConsole
                     var customer = customerService.CustomerById(currentAcct.CustomerID);
 
                     TransactionService transaction = new TransactionService();
+
+                    var transactions = transaction.CreateTransaction(DateTime.Now);
+
                     bool menuLoop = true;
                     while (menuLoop)
                     {
@@ -114,6 +117,8 @@ namespace Bank.ATMConsole
                         else if (actionInput == "3")
                         {
                             DepositService deposit = new DepositService();
+                            var depAmount = Decimal.Parse(Console.ReadLine());
+                            deposit.CreateDeposit(currentAcct, depAmount, )
                         }
                         
                         // Transaction history

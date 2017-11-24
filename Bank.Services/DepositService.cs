@@ -30,8 +30,9 @@ namespace Bank.Services
         }
 
 
-        public bool CreateDeposit(Nullable<decimal> amount, int transactionId)
+        public bool CreateDeposit(AccountModel account, Nullable<decimal> amount, int transactionId)
         {
+            var acctService = new AccountService();
             using (var context = new Bank_LibraryEntities())
             {
                 var newDeposit =
@@ -41,6 +42,8 @@ namespace Bank.Services
                         TransactionID = transactionId
                     };
                 context.Deposits.Add(newDeposit);
+
+                acctService.DepositToAccount(context, account, amount);
 
                 return context.SaveChanges() == 1;
             }

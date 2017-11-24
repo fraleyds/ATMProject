@@ -53,9 +53,9 @@ namespace Bank.Services
             var transList = deposit.Concat(withdrawal);
             var sortedList = transList.OrderBy(e => e.TransactionID);
 
-            foreach (var listItem in sortedList)
+            using (var context = new Bank_LibraryEntities())
             {
-                using (var context = new Bank_LibraryEntities())
+                foreach (var listItem in sortedList)
                 {
                     var transact =
                         context
